@@ -20,9 +20,44 @@
  * SOFTWARE.
  */
 
+#include "pool_party/detail/thread_factory.hpp"
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-class ExampleTests : public testing::Test {};
+#include <functional>
 
-TEST_F(ExampleTests, InitialExampleTest) {}
+namespace {
+using testing::Eq;
+
+class ThreadFake {
+public:
+    template<typename Callable, typename... Args>
+    explicit ThreadFake(Callable&& callable, Args&&... args) {
+        callable(std::forward<Args>(args)...);
+    }
+};
+}  // namespace
+
+class ThreadFactoryTests : public testing::Test {};
+
+TEST_F(ThreadFactoryTests, CreateThreadWithFactory) {
+    bool thread_function_called{false};
+
+    pool_party::detail::ThreadFactory<ThreadFake> thread_factory{};
+
+    auto thread_function{[&thread_function_called]() { thread_function_called = true; }};
+    auto created_thread{thread_factory.create(thread_function)};
+    EXPECT_TRUE(thread_function_called);
+}
+
+TEST_F(ThreadFactoryTests, PassACallableWithVariadicParameters) {
+    int parameter{0};
+    const int expected_parameter{42};
+
+    pool_party::detail::ThreadFactory<ThreadFake> thread_factory{};
+
+    auto thread_function{[&parameter](int p) { parameter = p; }};
+    auto created_thread{thread_factory.create(thread_function, expected_parameter)};
+    EXPECT_THAT(parameter, Eq(expected_parameter));
+}
