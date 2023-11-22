@@ -15,7 +15,8 @@ set(WARNING_FLAGS -Wall -Werror -Wextra -Wpedantic)
 # Activate clang tidy
 set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file=${CMAKE_CURRENT_SOURCE_DIR}/.clang-tidy)
 
-# Todo: Include real sources / includes here with add_subdirectory
+add_library(pool_party INTERFACE)
+target_include_directories(pool_party INTERFACE ${CMAKE_SOURCE_DIR}/include)
 
 # Including function to use git submodules
 include(InitGitSubmodule)

@@ -20,9 +20,36 @@
  * SOFTWARE.
  */
 
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
+#ifndef POOL_PARTY_DETAIL_THREAD_FACTORY_HPP_
+#define POOL_PARTY_DETAIL_THREAD_FACTORY_HPP_
 
-class ExampleTests : public testing::Test {};
+#include <utility>
 
-TEST_F(ExampleTests, InitialExampleTest) {}
+namespace pool_party {
+namespace detail {
+
+/**
+ * @brief Factory to fabricate threads.
+ *
+ * This class is an abstraction for creating threads.
+ *
+ * @tparam ThreadType The thread type to fabricate.
+ */
+template<typename ThreadType>
+class ThreadFactory {
+    using ThreadFunction = std::function<void()>;
+
+public:
+    /**
+     * @brief Creates a thread of type ThreadType.
+     *
+     * @param thread_function The callable function which is passed to the thread.
+     */
+    ThreadType create(ThreadFunction thread_function) {
+        return ThreadType{thread_function};
+    }
+};
+}  // namespace detail
+}  // namespace pool_party
+
+#endif  // POOL_PARTY_DETAIL_THREAD_FACTORY_HPP_

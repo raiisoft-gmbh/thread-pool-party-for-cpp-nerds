@@ -12,10 +12,10 @@ set_target_properties(gmock gmock_main gtest gtest_main PROPERTIES
 )
 
 add_executable(poolparty_tests
-               example_test.cpp
+               thread_factory_tests.cpp
 )
 target_compile_options(poolparty_tests PRIVATE ${WARNING_FLAGS})
-target_link_libraries(poolparty_tests PRIVATE gtest gmock gtest_main)
+target_link_libraries(poolparty_tests PRIVATE pool_party gtest gmock gtest_main)
 gtest_discover_tests(poolparty_tests)
 set_target_properties(poolparty_tests PROPERTIES
                       CXX_CLANG_TIDY "" # testcode excluded from clang-tidy run due to findings in gtest macros
