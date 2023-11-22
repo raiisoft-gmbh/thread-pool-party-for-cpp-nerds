@@ -1,3 +1,5 @@
+add_subdirectory(mocks)
+
 add_executable(poolparty_unit_tests
                thread_factory_tests.cpp
 )
