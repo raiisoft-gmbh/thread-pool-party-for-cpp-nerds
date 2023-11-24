@@ -2,6 +2,7 @@ add_subdirectory(mocks)
 
 add_executable(poolparty_unit_tests
                thread_factory_tests.cpp
+               thread_pool_tests.cpp
                sync_tests.cpp
 )
 target_compile_options(poolparty_unit_tests PRIVATE ${WARNING_FLAGS})
