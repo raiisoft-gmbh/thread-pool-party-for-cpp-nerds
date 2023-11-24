@@ -37,16 +37,17 @@ namespace detail {
  */
 template<typename ThreadType>
 class ThreadFactory {
-    using ThreadFunction = std::function<void()>;
-
 public:
+    using thread_type = ThreadType;
+
     /**
      * @brief Creates a thread of type ThreadType.
      *
      * @param thread_function The callable function which is passed to the thread.
      */
-    ThreadType create(ThreadFunction thread_function) {
-        return ThreadType{thread_function};
+    template<typename Callable, typename... Args>
+    ThreadType create(Callable&& thread_function, Args&&... args) {
+        return ThreadType{std::forward<Callable>(thread_function), std::forward<Args>(args)...};
     }
 };
 }  // namespace detail
