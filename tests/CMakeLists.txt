@@ -14,6 +14,7 @@ set_target_properties(gmock gmock_main gtest gtest_main PROPERTIES
 add_executable(poolparty_tests
                thread_factory_tests.cpp
                thread_joiner_tests.cpp
+               sync_tests.cpp
 )
 target_compile_options(poolparty_tests PRIVATE ${WARNING_FLAGS})
 target_link_libraries(poolparty_tests PRIVATE pool_party gtest gmock gtest_main)
