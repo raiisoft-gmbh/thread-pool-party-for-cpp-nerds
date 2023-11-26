@@ -12,3 +12,4 @@ set_target_properties(gmock gmock_main gtest gtest_main PROPERTIES
 )
 
 add_subdirectory(unit)
+add_subdirectory(integration)
