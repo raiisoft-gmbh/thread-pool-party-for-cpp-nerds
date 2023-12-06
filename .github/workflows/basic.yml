@@ -1,0 +1,38 @@
+name: Build on Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker Image
+      run: docker build -t poolparty .
+
+    - name: Build CMake
+      run: |
+        docker run --name container_with_cmake_built poolparty /bin/bash -c "cmake -S . -B build -G Ninja && cmake --build build"
+        docker commit container_with_cmake_built cmake_built_image
+
+    - name: Run CTest
+      run: docker run cmake_built_image /bin/bash -c "cd build && ctest --test-dir . && gcovr"
+
+  clangformat:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker Image
+      run: docker build -t poolparty .
+
+    - name: Check clang-format
+      run: docker run poolparty python3 scripts/check-clang-format.py
