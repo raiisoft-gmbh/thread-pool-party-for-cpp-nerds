@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(poolparty VERSION 0.0.1
-               DESCRIPTION "A modern, fully tested C++ thread pool implementation"
-               LANGUAGES CXX)
+project(poolparty VERSION 1.0.0
+                  DESCRIPTION "A modern, fully tested C++ thread pool implementation"
+                  LANGUAGES CXX)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
