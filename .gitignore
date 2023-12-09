@@ -94,5 +94,8 @@ _deps
 # Recommended build folder for out-of-source builds
 build
 
+# Ignore the install directory
+install
+
 # End of https://www.toptal.com/developers/gitignore/api/c++,cmake,c
 
