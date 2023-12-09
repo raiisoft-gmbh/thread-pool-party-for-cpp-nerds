@@ -18,6 +18,9 @@ set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file=${CMAKE_CURRENT_SOURCE_DIR}/.c
 add_library(pool_party INTERFACE)
 target_include_directories(pool_party INTERFACE ${CMAKE_SOURCE_DIR}/include)
 
+# Install include folder
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
+
 # Including function to use git submodules
 include(InitGitSubmodule)
 

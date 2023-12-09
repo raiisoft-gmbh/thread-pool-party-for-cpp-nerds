@@ -1,3 +1,4 @@
+set(INSTALL_GTEST OFF)
 add_subdirectory("${PROJECT_SOURCE_DIR}/extern/googletest" "extern/googletest")
 
 # hide gtest variables in ccmake configuration
