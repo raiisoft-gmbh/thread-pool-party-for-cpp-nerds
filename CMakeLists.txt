@@ -19,6 +19,9 @@ add_library(pool_party INTERFACE)
 target_include_directories(pool_party INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_compile_features(pool_party INTERFACE cxx_std_11)
 
+# Install include folder
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
+
 # Including function to use git submodules
 include(InitGitSubmodule)
 
