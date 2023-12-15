@@ -17,7 +17,7 @@ set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file=${CMAKE_CURRENT_SOURCE_DIR}/.c
 
 add_library(pool_party INTERFACE)
 target_include_directories(pool_party INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-set_target_properties(pool_party PROPERTIES CXX_STANDARD 11)
+target_compile_features(pool_party PUBLIC cxx_std_11)
 
 # Including function to use git submodules
 include(InitGitSubmodule)
